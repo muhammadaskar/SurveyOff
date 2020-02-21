@@ -18,6 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 /* ----------------
+|      USER      |
+-----------------*/
+Route::get('user', 'Users\UserController@tampilUsers');
+Route::post('user/register', 'Users\UserController@register');
+Route::delete('user/{id}', 'Users\UserController@deleteUser');
+
+
+/* ----------------
 |      PAKET      |
 -----------------*/
 Route::get('paket', 'Paket\JenisPaketController@tampilJenisPaket');
