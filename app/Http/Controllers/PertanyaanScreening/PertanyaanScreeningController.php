@@ -41,4 +41,35 @@ class PertanyaanScreeningController extends Controller
         }
     }
 
+    public function editPertanyaanScreening(Request $request, $id){
+        $pertanyaan = PertanyaanScreeningModel::find($id);
+        if (is_null($pertanyaan)){
+            return response()->json([
+                "success" => false,
+                "message" => "data not found"
+            ], 404);
+        }
+        $pertanyaan->update($request->all());
+        return response()->json([
+            "success" => true,
+            "data" => $pertanyaan
+        ], 201);
+    }
+
+    public function hapusPertanyaanScreening($id){
+        $pertanyaan = PertanyaanScreeningModel::find($id);
+        if (is_null($pertanyaan)){
+            return response()->json([
+                "success" => false,
+                "message" => "data not found"
+            ], 404);
+        }
+        $pertanyaan->delete();
+        return response()->json([
+            "success" => false,
+            "message" => "deleted successfully"
+        ], 200);
+
+    }
+
 }

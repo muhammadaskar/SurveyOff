@@ -30,12 +30,17 @@ Route::put('paket/{id}', 'Paket\JenisPaketController@editPaket');
 Route::get('registrasiPaket', 'Paket\registrasiPaketController@tampil');
 Route::post('registrasiPaket/{id}', 'Paket\registrasiPaketController@addRegistPaket');
 
-/* ----------------
-|    PERTANYAAN   |
------------------*/
+
+/* ----------------------
+|    JUDUL DESKRIPSI   |
+------------------------*/
 Route::get('pertanyaan/judulDeskripsi/{id}', 'Pertanyaan\PertanyaanController@tampilJudulDeskripsi');
 Route::post('pertanyaan/judulDeskripsi/{id}', 'Pertanyaan\PertanyaanController@addJudulDeskripsi');
 Route::put('pertanyaan/judulDeskripsi/{id}', 'Pertanyaan\PertanyaanController@editJudulDeskripsi');
+/* ----------------
+|    PERTANYAAN   |
+-----------------*/
+
 Route::get('pertanyaan', 'Pertanyaan\PertanyaanController@tampilPertanyaan');
 Route::post('pertanyaan/postPertanyaan/{id}', 'Pertanyaan\PertanyaanController@postPertanyaan');
 Route::delete('pertanyaan/deletePertanyaan/{id}', 'Pertanyaan\PertanyaanController@deletePertanyaan');
@@ -45,6 +50,7 @@ Route::delete('pertanyaan/deletePertanyaan/{id}', 'Pertanyaan\PertanyaanControll
 ----------------------------*/
 Route::get('pertanyaanScreening', 'PertanyaanScreening\PertanyaanScreeningController@tampilPertanyaanScreening');
 Route::post('pertanyaanScreening/{id}', 'PertanyaanScreening\PertanyaanScreeningController@postPertanyaanScreening');
+Route::put('pertanyaanScreening/{id}', 'PertanyaanScreening\PertanyaanScreeningController@editPertanyaanScreening');
 
 
 

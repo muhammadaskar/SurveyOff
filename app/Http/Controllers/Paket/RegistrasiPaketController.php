@@ -10,7 +10,6 @@ use Exception;
 
 class RegistrasiPaketController extends Controller
 {
-    
 
     public function tampil(){
         $list = DB::select('select id, user_id, paket_id, jumlah_responden, bukti_bayar from registrasi_paket');
