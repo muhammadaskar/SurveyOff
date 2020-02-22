@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\UserModel;
@@ -20,17 +21,6 @@ class Usercontroller extends Controller
         ], 200);
     }
 
-    // public function registUser(Request $request){
-    //     $input = $request->all(); 
-    //     $input['password'] = bcrypt($input['password']); 
-    //     $user = UserModel::create($input); 
-    //     $success['token'] =  $user->createToken('MyApp')-> accessToken; 
-    //     $success['name'] =  $user->name;
-    //     return response()->json([
-    //         'success'=>$success
-    //     ], 200); 
-    // }
-
     public function register(Request $request){ 
         try{
             $validator = Validator::make($request->all(), [ 
@@ -43,10 +33,15 @@ class Usercontroller extends Controller
             }
             $input = $request->all(); 
             $input['password'] = bcrypt($input['password']); 
-            $user = UserModel::create($input); 
-            $success['token'] =  $user->createToken('MyApp')-> accessToken; 
+            // $input['remember_token'] = bcrypt($input['remember_token']);
+            // $user = UserModel::create($input); 
+            $user = User::create($input); 
+            // $success['token'] =  $user->createToken('MyApp')->accessToken; 
             $success['name'] =  $user->name;
-            return response()->json(['success'=>$success], 200); 
+            return response()->json([
+                'success'=> true,
+                'data' => $success
+            ], 200); 
         }catch(Exception $e){
             return response()->json([
                 "success" => false,

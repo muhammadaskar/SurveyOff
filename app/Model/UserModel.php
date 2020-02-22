@@ -13,6 +13,7 @@ class UserModel extends Model
         'tanggal_lahir',
         'jenis_kelamin',
         'password',
+        'remeber_token',
     ];
     
 }
