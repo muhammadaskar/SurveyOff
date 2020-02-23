@@ -21,9 +21,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 |      USER      |
 -----------------*/
 Route::get('user', 'Users\UserController@tampilUsers');
+Route::get('user/{id}', 'Users\UserController@findUserById');
 Route::post('user/register', 'Users\UserController@register');
+Route::post('user/login', 'Users\UserController@login');
+Route::put('user/{id}', 'Users\UserController@editUser');
 Route::delete('user/{id}', 'Users\UserController@deleteUser');
-
 
 /* ----------------
 |      PAKET      |
