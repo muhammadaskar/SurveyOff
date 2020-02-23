@@ -27,6 +27,11 @@ Route::post('user/login', 'Users\UserController@login');
 Route::put('user/{id}', 'Users\UserController@editUser');
 Route::delete('user/{id}', 'Users\UserController@deleteUser');
 
+// Route::group(['middleware' => 'auth:api'], function() {
+//     Route::post('user/upload', 'Users\UserController@uploadFoto');
+// });
+
+
 /* ----------------
 |      PAKET      |
 -----------------*/

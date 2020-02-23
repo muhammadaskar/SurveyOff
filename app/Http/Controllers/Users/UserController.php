@@ -30,15 +30,24 @@ class Usercontroller extends Controller
                 'password' => 'required'
             ]);
             if ($validator->fails()) { 
-                return response()->json(['error'=>$validator->errors()], 401);            
+                return response()->json([
+                    'error'=> $validator->errors()
+                ], 401);            
             }
+            
             $input = $request->all(); 
+
+            $fileName = $input['ktm'] .".jpg";
+            $path = $request->file('ktm')->move(public_path('/ktm'), $fileName);
+            $photoURL = url('/'.$fileName);
+
             $input['password'] = bcrypt($input['password']); 
             $user = User::create($input); 
-            $success['token'] =  $user->createToken('MyApp')->accessToken; 
             $success['name'] =  $user->name;
+            $success['token'] =  $user->createToken('MyApp')->accessToken; 
             return response()->json([
                 'success'=> true,
+                'ktm' => $photoURL,
                 'data' => $success
             ], 200); 
         }catch(Exception $e){
@@ -106,6 +115,17 @@ class Usercontroller extends Controller
             "success" => true,
             "data" => "deletd successfully"
         ], 200);
+    }
+
+    public function uploadFoto(Request $request){
+        $fileName = "userImage.jpg";
+        $path = $request->file('photo')->move(public_path('/'), $fileName);
+        $photoURL = url('/'.$fileName);
+        return response()->json([
+            "success" => true,
+            "url" => $fileName
+        ], 201);
+        
     }
 
 
