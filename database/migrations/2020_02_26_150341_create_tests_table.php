@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRegistrasiPaketTable extends Migration
+class CreateTestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateRegistrasiPaketTable extends Migration
      */
     public function up()
     {
-        Schema::create('registrasi_paket', function (Blueprint $table) {
+        Schema::create('test', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')
-            ->references('id')->on('users');
-            $table->integer('paket_id')->unsigned();
-            $table->foreign('paket_id')
-            ->references('id')->on('jenis_paket');
+            $table->integer('user_id');
+            $table->integer('paket_id');
             $table->string('name');
             $table->string('email', 50)->unique();
             $table->integer('jumlah_responden');
@@ -38,6 +34,6 @@ class CreateRegistrasiPaketTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registrasi_paket');
+        Schema::dropIfExists('test');
     }
 }

@@ -1,102 +1,3 @@
-{{-- <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html> --}}
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
  
@@ -105,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
  
-    <title>Simple Donation with Midtrans</title>
+    <title></title>
  
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -160,9 +61,9 @@
  
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="control-label" for="donor_name">Donor Name</label>
+                        <label class="control-label" for="name_regist">Name</label>
                         <div>
-                            <input id="donor_name" name="donor_name" type="text" placeholder="Enter your name.." class="form-control input-md"
+                            <input id="name_regist" name="name_regist" type="text" placeholder="Enter your name.." class="form-control input-md"
                                 required="">
  
                         </div>
@@ -174,9 +75,9 @@
  
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="control-label" for="donor_email">Donor Email</label>
+                        <label class="control-label" for="email_regist">Email</label>
                         <div>
-                            <input id="donor_email" name="donor_email" type="text" placeholder="Enter your email.." class="form-control input-md"
+                            <input id="email_regist" name="email_regist" type="text" placeholder="Enter your email.." class="form-control input-md"
                                 required="">
     
                         </div>
@@ -188,12 +89,12 @@
  
                     <!-- Select Basic -->
                     <div class="form-group">
-                        <label class="control-label" for="donation_type">Type</label>
+                        <label class="control-label" for="paket_id">Paket</label>
                         <div>
                             <select id="donation_type" name="donation_type" class="form-control">
-                                <option value="infak_kemanusiaan">Infak Kemanusiaan</option>
-                                <option value="infak_pendidikan">Infak Pendidikan</option>
-                                <option value="infak_kesehatan">Infak Kesehatan</option>
+                                <option value="1">Paket 1</option>
+                                <option value="2">Paket 2</option>
+                                <option value="3">Paket 3</option>
                             </select>
                         </div>
                     </div>
@@ -202,7 +103,7 @@
             </div>
  
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
  
                     <!-- Prepended text-->
                     <label for="">Amount</label>
@@ -214,13 +115,23 @@
                     </div>
  
                 </div>
-                <div class="col-md-6">
+
+                <div class="col-md-4">
  
-                    <!-- Textarea -->
+                    <!-- Prepended text-->
+                    <label for="jumlah_responden">Jumlah responden</label>
+                    <div class="input-group">
+                        <input id="jumlah_responden" name="jumlah_responden" class="form-control" placeholder="" type="number">
+                    </div>
+ 
+                </div>
+
+                <div class="col-md-4">
+ 
                     <div class="form-group">
-                        <label class="control-label" for="note">Note (Optional)</label>
+                        <label class="control-label" for="user_id">User id</label>
                         <div>
-                            <textarea class="form-control" id="note" name="note"></textarea>
+                            <input class="form-control" id="user_id" name="user_id"></input>
                         </div>
                     </div>
  
@@ -242,12 +153,12 @@
                 <th>Status</th>
                 <th style="text-align: center;">Pay</th>
             </tr>
-            @foreach ($donations as $donation)
+            @foreach ($test as $donation)
             <tr>
                 <td><code>{{ $donation->id }}</code></td>
-                <td>{{ $donation->donor_name }}</td>
+                <td>{{ $donation->name }}</td>
                 <td>Rp. {{ number_format($donation->amount) }},-</td>
-                <td>{{ ucwords(str_replace('_', ' ', $donation->donation_type)) }}</td>
+                <td>{{ $donation->jumlah_responden }}</td>
                 <td>{{ ucfirst($donation->status) }}</td>
                 <td style="text-align: center;">
                     @if ($donation->status == 'pending')
@@ -301,4 +212,3 @@
     </script>
 </body>
 </html>
- 

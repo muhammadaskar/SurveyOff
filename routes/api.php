@@ -44,6 +44,7 @@ Route::put('paket/{id}', 'Paket\JenisPaketController@editPaket');
 ------------------------*/
 Route::get('registrasiPaket', 'Paket\registrasiPaketController@tampil');
 Route::post('registrasiPaket/{id}', 'Paket\registrasiPaketController@addRegistPaket');
+Route::post('registrasiPaket', 'Paket\registrasiPaketController@submitRegist');
 
 
 /* ----------------------
@@ -70,5 +71,5 @@ Route::put('pertanyaanScreening/{id}', 'PertanyaanScreening\PertanyaanScreeningC
 
 
 
-
+Route::post('/donation/store', 'DonationController@submitDonation');
 

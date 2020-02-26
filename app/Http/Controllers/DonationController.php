@@ -1,21 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Paket;
+namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use App\Model\Donation;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Model\RegistrasiPaketModel;
-use Exception;
-
 use Veritrans_Config;
 use Veritrans_Snap;
 use Veritrans_Notification;
 
-class RegistrasiPaketController extends Controller
+class DonationController extends Controller
 {
-
-        /**
+    /**
      * Make request global.
      *
      * @var \Illuminate\Http\Request
@@ -47,7 +42,9 @@ class RegistrasiPaketController extends Controller
      */
     public function index()
     {
-        return view('registrasi');
+        $data['donations'] = Donation::orderBy('id', 'desc')->paginate(8);
+
+        return view('welcome', $data);
     }
 
     /**
@@ -55,58 +52,50 @@ class RegistrasiPaketController extends Controller
      *
      * @return array
      */
-    public function submitRegist()
+    public function submitDonation()
     {
-        try{
-            DB::transaction(function(){
-                // Save donasi ke database
-                // $donation = RegistrasiPaketModel::create([
-                //     'name' => $this->request->name,
-                //     'email' => $this->request->email,
-                //     'user_id' => $this->request->user_id,
-                //     'paket_id' => $this->request->paket_id,
-                //     'jumlah_responden' => $this->request->jumlah_responden,
-                //     'amount' => floatval($this->request->amount),
-                // ]);
-    
-                $donation = RegistrasiPaketModel::create($this->request->all());
-    
-                // Buat transaksi ke midtrans kemudian save snap tokennya.
-                $payload = [
-                    'transaction_details' => [
-                        'order_id'      => $donation->id,
-                        'gross_amount'  => $donation->amount,
-                    ],
-                    'customer_details' => [
-                        'first_name'    => $donation->name,
-                        'email'         => $donation->email,
-                    ],
-                    'item_details' => [
-                        [
-                            'id'       => $donation->id,
-                            'price'    => $donation->amount,
-                            'quantity' => 1,
-                            // 'name'     => ucwords(str_replace('_', ' ', $donation->name))
-                            'name'     => $donation->name
-                        ]
+        \DB::transaction(function(){
+            // Save donasi ke database
+            // $donation = Donation::create([
+            //     'donor_name' => $this->request->donor_name,
+            //     'donor_email' => $this->request->donor_email,
+            //     'donation_type' => $this->request->donation_type,
+            //     'amount' => floatval($this->request->amount),
+            //     'note' => $this->request->note,
+            // ]);
+
+            $donation = Donation::create($this->request->all());
+
+            // Buat transaksi ke midtrans kemudian save snap tokennya.
+            $payload = [
+                'transaction_details' => [
+                    'order_id'      => $donation->id,
+                    'gross_amount'  => $donation->amount,
+                ],
+                'customer_details' => [
+                    'first_name'    => $donation->donor_name,
+                    'email'         => $donation->donor_email,
+                    // 'phone'         => '08888888888',
+                    // 'address'       => '',
+                ],
+                'item_details' => [
+                    [
+                        'id'       => $donation->donation_type,
+                        'price'    => $donation->amount,
+                        'quantity' => 1,
+                        'name'     => ucwords(str_replace('_', ' ', $donation->donation_type))
                     ]
-                ];
-                $snapToken = Veritrans_Snap::getSnapToken($payload);
-                $donation->snap_token = $snapToken;
-                $donation->save();
-    
-                // Beri response snap token
-                $this->response['snap_token'] = $snapToken;
-            });
-            return response()->json(
-                $this->response
-            );
-        } catch(Exception $e){
-            return response()->json([
-                "success" => false,
-                "error" => $e
-            ]);
-        }
+                ]
+            ];
+            $snapToken = Veritrans_Snap::getSnapToken($payload);
+            $donation->snap_token = $snapToken;
+            $donation->save();
+
+            // Beri response snap token
+            $this->response['snap_token'] = $snapToken;
+        });
+
+        return response()->json($this->response);
         
     }
 
@@ -120,13 +109,13 @@ class RegistrasiPaketController extends Controller
     public function notificationHandler(Request $request)
     {
         $notif = new Veritrans_Notification();
-        DB::transaction(function() use($notif) {
+        \DB::transaction(function() use($notif) {
 
             $transaction = $notif->transaction_status;
             $type = $notif->payment_type;
             $orderId = $notif->order_id;
             $fraud = $notif->fraud_status;
-            $donation = RegistrasiPaketModel::findOrFail($id);
+            $donation = Donation::findOrFail($orderId);
 
             if ($transaction == 'capture') {
 
@@ -182,42 +171,4 @@ class RegistrasiPaketController extends Controller
 
         return;
     }
-
-    public function tampil(){
-        $list = DB::select('select * from registrasi_paket');
-        // $list = DB::select('select id from registrasi_paket');
-        return response()->json([
-            "success" => true,
-            "data" => $list
-        ], 200);
-    }
-
-    public function addRegistPaket(Request $request, $id){
-        $usersId = DB::table('users')->where('id', $id)->value('id');
-        try{
-            if($id != $usersId){
-                return response()->json([
-                    "success" => false,
-                    "message" => "user not found"
-                ], 404);
-            } else {
-                $paket = RegistrasiPaketModel::create($request->all());
-                return response()->json([
-                    "success" => true,
-                    "data" => $paket
-                ], 201);
-            }
-        }catch(Exception $e){
-            return response()->json([
-                "success" => false,
-                "message" => $e
-            ], 400);
-        }
-    }
-
-    
-
-
-
-
 }

@@ -4,21 +4,22 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RegistrasiPaketModel extends Model
+class Donation extends Model
 {
-    protected $table = 'tests';
+        /**
+     * Fillable attribute.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'name',
-        'email',
-        'user_id',
-        'paket_id',
-        'jumlah_responden',
+        'donor_name',
+        'donor_email',
+        'donation_type',
         'amount',
-        'status',
-        'snap_token',
+        'note',
     ];
 
-        /**
+    /**
      * Set status to Pending
      *
      * @return void
@@ -61,4 +62,5 @@ class RegistrasiPaketModel extends Model
         $this->attributes['status'] = 'expired';
         self::save();
     }
+
 }

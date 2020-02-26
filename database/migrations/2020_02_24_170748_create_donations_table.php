@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRegistrasiPaketTable extends Migration
+class CreateDonationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,13 @@ class CreateRegistrasiPaketTable extends Migration
      */
     public function up()
     {
-        Schema::create('registrasi_paket', function (Blueprint $table) {
+        Schema::create('donations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')
-            ->references('id')->on('users');
-            $table->integer('paket_id')->unsigned();
-            $table->foreign('paket_id')
-            ->references('id')->on('jenis_paket');
-            $table->string('name');
-            $table->string('email', 50)->unique();
-            $table->integer('jumlah_responden');
+            $table->string('donor_name')->nullable();
+            $table->string('donor_email')->nullable();
+            $table->string('donation_type')->nullable();
             $table->decimal('amount', 20, 2)->default(0);
+            $table->string('note')->nullable();
             $table->string('status')->default('pending');
             $table->string('snap_token')->nullable();
             $table->timestamps();
@@ -38,6 +33,6 @@ class CreateRegistrasiPaketTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registrasi_paket');
+        Schema::dropIfExists('donations');
     }
 }
