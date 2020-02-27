@@ -128,7 +128,7 @@
                 <th>Status</th>
                 <th style="text-align: center;">Pay</th>
             </tr>
-            @foreach ($test as $donation)
+            @foreach ($regist as $donation)
             <tr>
                 <td><code>{{ $donation->id }}</code></td>
                 <td>{{ $donation->name }}</td>
