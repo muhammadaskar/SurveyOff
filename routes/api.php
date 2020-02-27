@@ -44,7 +44,7 @@ Route::put('paket/{id}', 'Paket\JenisPaketController@editPaket');
 ------------------------*/
 Route::get('registrasiPaket', 'Paket\registrasiPaketController@tampil');
 Route::post('registrasiPaket/{id}', 'Paket\registrasiPaketController@addRegistPaket');
-Route::post('registrasiPaket', 'Paket\registrasiPaketController@submitRegist');
+Route::post('registrasiPaket', 'Paket\RegistrasiPaketController@submitRegist')->name('registrasi.store');
 
 
 /* ----------------------
@@ -67,9 +67,3 @@ Route::delete('pertanyaan/deletePertanyaan/{id}', 'Pertanyaan\PertanyaanControll
 Route::get('pertanyaanScreening', 'PertanyaanScreening\PertanyaanScreeningController@tampilPertanyaanScreening');
 Route::post('pertanyaanScreening/{id}', 'PertanyaanScreening\PertanyaanScreeningController@postPertanyaanScreening');
 Route::put('pertanyaanScreening/{id}', 'PertanyaanScreening\PertanyaanScreeningController@editPertanyaanScreening');
-
-
-
-
-Route::post('/donation/store', 'DonationController@submitDonation');
-

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RegistrasiPaketModel extends Model
 {
-    protected $table = 'tests';
+    protected $table = 'registrasi_paket';
     protected $fillable = [
         'name',
         'email',

@@ -23,47 +23,22 @@
 </head>
  
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">Online Donation</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
- 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#create">Donation</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#list">Donation List</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
- 
-    <div class="jumbotron jumbotron-fluid" style="background-color: #74b9ff; color: white;">
-        <div class="container">
-            <h1 class="display-4">Online Donation</h1>
-            <p class="lead">This is just simple donation web with Midtrans.</p>
-        </div>
-    </div>
  
     <div class="container">
  
         <form class="form-horizontal" id="donation" onsubmit="return submitForm();">
  
             <!-- Form Name -->
-            <legend>Donation</legend>
+            <legend>Registrasi Paket</legend>
  
             <div class="row">
                 <div class="col-md-4">
  
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="control-label" for="name_regist">Name</label>
+                        <label class="control-label" for="name">Name</label>
                         <div>
-                            <input id="name_regist" name="name_regist" type="text" placeholder="Enter your name.." class="form-control input-md"
+                            <input id="name" name="name" type="text" placeholder="Enter your name.." class="form-control input-md"
                                 required="">
  
                         </div>
@@ -75,9 +50,9 @@
  
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="control-label" for="email_regist">Email</label>
+                        <label class="control-label" for="email">Email</label>
                         <div>
-                            <input id="email_regist" name="email_regist" type="text" placeholder="Enter your email.." class="form-control input-md"
+                            <input id="email" name="email" type="text" placeholder="Enter your email.." class="form-control input-md"
                                 required="">
     
                         </div>
@@ -91,7 +66,7 @@
                     <div class="form-group">
                         <label class="control-label" for="paket_id">Paket</label>
                         <div>
-                            <select id="donation_type" name="donation_type" class="form-control">
+                            <select id="paket_id" name="paket_id" class="form-control">
                                 <option value="1">Paket 1</option>
                                 <option value="2">Paket 2</option>
                                 <option value="3">Paket 3</option>
@@ -131,10 +106,10 @@
                     <div class="form-group">
                         <label class="control-label" for="user_id">User id</label>
                         <div>
-                            <input class="form-control" id="user_id" name="user_id"></input>
+                            <input type="number" class="form-control" id="user_id" name="user_id"></input>
                         </div>
                     </div>
- 
+
                 </div>
             </div>
  
@@ -171,7 +146,7 @@
                 <td colspan="6">{{ $donations->links() }}</td>
             </tr>
         </table> --}}
- 
+
     </div>
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -181,15 +156,16 @@
     <script>
     function submitForm() {
         // Kirim request ajax
-        $.post("{{ route('donation.store') }}",
+        $.post("{{ route('registrasi.store') }}",
         {
             _method: 'POST',
             _token: '{{ csrf_token() }}',
             amount: $('input#amount').val(),
-            note: $('textarea#note').val(),
-            donation_type: $('select#donation_type').val(),
-            donor_name: $('input#donor_name').val(),
-            donor_email: $('input#donor_email').val(),
+            jumlah_responden: $('input#jumlah_responden').val(),
+            paket_id: $('select#paket_id').val(),
+            name: $('input#name').val(),
+            email: $('input#email').val(),
+            user_id: $('input#user_id').val(),
         },
         function (data, status) {
             snap.pay(data.snap_token, {

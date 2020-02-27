@@ -12,9 +12,9 @@
 */
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/user', 'User\UserController@index');
 Route::resource('/user', 'User\UserController');
@@ -27,17 +27,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/', 'DonationController@index')->name('welcome');
-Route::post('/finish', function(){
-    return redirect()->route('welcome');
-})->name('donation.finish');
-
-Route::post('/donation/store', 'DonationController@submitDonation')->name('donation.store');
-Route::post('/notification/handler', 'DonationController@notificationHandler')->name('notification.handler');
 
 Route::post('/finish', function(){
     return redirect()->route('registrasi');
 })->name('registrasi.finish');
 
-Route::get('registrasi', 'Paket\registrasiPaketController@index');
-Route::post('registrasi/store', 'Paket\registrasiPaketController@submitRegist')->name('registrasi.store');
+Route::get('registrasi', 'Paket\RegistrasiPaketController@index');
+
+Route::post('/registrasi/store', 'Paket\RegistrasiPaketController@submitRegist')->name('registrasi.store');
+Route::post('/notification/handler', 'Paket\RegistrasiPaketController@notificationHandler')->name('notification.handler');
