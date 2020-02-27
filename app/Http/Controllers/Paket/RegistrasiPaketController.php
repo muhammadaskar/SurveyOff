@@ -91,8 +91,7 @@ class RegistrasiPaketController extends Controller
                 // $donation->addUpdate("Transaction order_id: " . $orderId ." is challenged by FDS");
                 $regist->setPending();
                 } else {
-                // TODO set payment status in merchant's database to 'Success'
-                // $donation->addUpdate("Transaction order_id: " . $orderId ." successfully captured using " . $type);
+                
                 $regist->setSuccess();
                 }
 
@@ -144,27 +143,27 @@ class RegistrasiPaketController extends Controller
         ], 200);
     }
 
-    public function addRegistPaket(Request $request, $id){
-        $usersId = DB::table('users')->where('id', $id)->value('id');
-        try{
-            if($id != $usersId){
-                return response()->json([
-                    "success" => false,
-                    "message" => "user not found"
-                ], 404);
-            } else {
-                $paket = RegistrasiPaketModel::create($request->all());
-                return response()->json([
-                    "success" => true,
-                    "data" => $paket
-                ], 201);
-            }
-        }catch(Exception $e){
-            return response()->json([
-                "success" => false,
-                "message" => $e
-            ], 400);
-        }
-    }
+    // public function addRegistPaket(Request $request, $id){
+    //     $usersId = DB::table('users')->where('id', $id)->value('id');
+    //     try{
+    //         if($id != $usersId){
+    //             return response()->json([
+    //                 "success" => false,
+    //                 "message" => "user not found"
+    //             ], 404);
+    //         } else {
+    //             $paket = RegistrasiPaketModel::create($request->all());
+    //             return response()->json([
+    //                 "success" => true,
+    //                 "data" => $paket
+    //             ], 201);
+    //         }
+    //     }catch(Exception $e){
+    //         return response()->json([
+    //             "success" => false,
+    //             "message" => $e
+    //         ], 400);
+    //     }
+    // }
 
 }
