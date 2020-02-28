@@ -17,6 +17,7 @@
         "laravel/tinker": "^1.0",
         "midtrans/midtrans-php": "^2.2",
         "paragonie/random_compat": "~2.0",
+        "spatie/laravel-cors": "^1.6",
         "veritrans/veritrans-php": "^1.2"
     },
     "require-dev": {

@@ -59,3 +59,5 @@ class PertanyaanController extends Controller
 
 
 }
+
+// TOOO : TAMPILKAN JAWABAN SEMUA RESPONDEN
