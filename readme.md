@@ -17,7 +17,8 @@
 - jumlah_pertanyaan : int(11)
 - jumlah_hari : string(199)
 - harga : string(199)
-- Registrasi Paket Pertanyaan
+
+## Registrasi Paket Pertanyaan
 - id : integer
 - user_id : integer references on id(user)
 - paket_id : integer references on id(jenis_paket)
