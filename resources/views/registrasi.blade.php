@@ -112,6 +112,28 @@
 
                 </div>
             </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="judul">Judul</label>
+                        <div>
+                            <input type="text" class="form-control" id="judul" name="judul"></input>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="deskripsi">Deskripsi</label>
+                        <div>
+                            <input type="text" class="form-control" id="deskripsi" name="deskripsi"></input>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
  
             <button id="submit" class="btn btn-success">Submit</button>
  
@@ -162,6 +184,8 @@
             _token: '{{ csrf_token() }}',
             amount: $('input#amount').val(),
             jumlah_responden: $('input#jumlah_responden').val(),
+            judul: $('input#judul').val(),
+            deskripsi: $('input#deskripsi').val(),
             paket_id: $('select#paket_id').val(),
             name: $('input#name').val(),
             email: $('input#email').val(),

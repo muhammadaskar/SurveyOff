@@ -17,7 +17,7 @@ class CreateDetailPertanyaanScreeningTable extends Migration
             $table->increments('id');
             $table->integer('pertanyaan_id')->unsigned();
             $table->foreign('pertanyaan_id')
-                ->references('id')->on('pertanyaan');
+                ->references('id')->on('registrasi_paket');
             $table->string('pertanyaan');
             $table->string('j1')-> nullable();
             $table->string('j2')-> nullable();

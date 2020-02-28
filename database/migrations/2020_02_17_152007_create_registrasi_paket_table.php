@@ -24,6 +24,8 @@ class CreateRegistrasiPaketTable extends Migration
             $table->string('name');
             $table->string('email', 50)->unique();
             $table->integer('jumlah_responden');
+            $table->string('judul');
+            $table->string('deskripsi');
             $table->decimal('amount', 20, 2)->default(0);
             $table->string('status')->default('pending');
             $table->string('snap_token')->nullable();

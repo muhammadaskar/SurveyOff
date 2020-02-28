@@ -20,7 +20,7 @@ class PertanyaanScreeningController extends Controller
     }
 
     public function postPertanyaanScreening(Request $request, $id){
-        $paketId = DB::table('pertanyaan')->where('id', $id)->value('id');
+        $paketId = DB::table('registrasi_paket')->where('id', $id)->value('id');
         try {
             if ($id != $paketId){
                 return response()->json([

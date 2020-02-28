@@ -54,7 +54,7 @@ class RegistrasiPaketController extends Controller
                         'id'       => $regist->id,
                         'price'    => $regist->amount,
                         'quantity' => 1,
-                        'name'     => $regist->email
+                        'name'     => $regist->judul
                     ]
                 ]
             ];

@@ -13,6 +13,8 @@ class RegistrasiPaketModel extends Model
         'user_id',
         'paket_id',
         'jumlah_responden',
+        'judul',
+        'deskripsi',
         'amount',
         'status',
         'snap_token',
