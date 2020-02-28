@@ -19,6 +19,20 @@ class JenisPaketController extends Controller
         ], 200);   
     }
 
+    public function tampilById($id){
+        $paket = JenisPaketModel::find($id);
+        if (is_null($paket)){
+            return response()->json([
+                "success" => false,
+                "message" => "paket not found"
+            ], 404);   
+        }
+        return response()->json([
+            "success" => true,
+            "data" => $paket
+        ], 200);   
+    }
+
     public function tambahPaket(Request $request){
         $paket = JenisPaketModel::create($request->all());
         return response()->json([

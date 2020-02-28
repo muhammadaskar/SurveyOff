@@ -19,13 +19,31 @@ class PertanyaanScreeningController extends Controller
         ], 200);
     }
 
+    public function tampilSemuaPertanyaanByRegistrasiId($id){
+        $pertanyaan = DB::table('registrasi_paket')->where('id', $id)->value('id');
+        if (is_null($pertanyaan)){
+            return response()->json([
+                "success" => false,
+                "message" => "data not found"
+            ], 404);
+        }
+        $db = DB::table('detail_pertanyaan_screening')
+        ->join('registrasi_paket', 'registrasi_paket.id', '=', "$id")
+        ->select('detail_pertanyaan_screening.id', 'detail_pertanyaan_screening.pertanyaan')
+        ->get();
+        return response()->json([
+            "success" => true,
+            "data" => $db
+        ], 200);
+    }
+
     public function postPertanyaanScreening(Request $request, $id){
         $paketId = DB::table('registrasi_paket')->where('id', $id)->value('id');
         try {
             if ($id != $paketId){
                 return response()->json([
                     "success" => false,
-                    "message" => "data not found"
+                    "message" => "paket not found"
                 ], 404);
             }
             $pertanyaan = DetailPertanyaanScreeningModel::create($request->all());
@@ -42,7 +60,7 @@ class PertanyaanScreeningController extends Controller
     }
 
     public function editPertanyaanScreening(Request $request, $id){
-        $pertanyaan = PertanyaanScreeningModel::find($id);
+        $pertanyaan = DetailPertanyaanScreeningModel::find($id);
         if (is_null($pertanyaan)){
             return response()->json([
                 "success" => false,
@@ -57,7 +75,7 @@ class PertanyaanScreeningController extends Controller
     }
 
     public function hapusPertanyaanScreening($id){
-        $pertanyaan = PertanyaanScreeningModel::find($id);
+        $pertanyaan = DetailPertanyaanScreeningModel::find($id);
         if (is_null($pertanyaan)){
             return response()->json([
                 "success" => false,
@@ -66,7 +84,7 @@ class PertanyaanScreeningController extends Controller
         }
         $pertanyaan->delete();
         return response()->json([
-            "success" => false,
+            "success" => true,
             "message" => "deleted successfully"
         ], 200);
 

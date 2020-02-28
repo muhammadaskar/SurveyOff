@@ -20,6 +20,53 @@ class PertanyaanController extends Controller
         ], 200);
     }
 
+    public function tampilById($id){
+        $pertanyaan = DetailPertanyaanModel::find($id);
+        if (is_null($pertanyaan)){
+            return response()->json([
+                "success" => false,
+                "message" => "data not found"
+            ], 404);
+        }
+        return response()->json([
+            "success" => true,
+            "data" => $pertanyaan
+        ], 200);
+    }
+
+    public function tampilPertanyaanByRegistrasiId($id){
+        $pertanyaan = DB::table('registrasi_paket')->where('id', $id)->value('id');
+        if (is_null($pertanyaan)){
+            return response()->json([
+                "success" => false,
+                "message" => "data not found"
+            ], 404);
+        }
+        $db = DB::table('detail_pertanyaan')
+        ->join('registrasi_paket', 'registrasi_paket.id', 'registrasi_paket.id')
+        ->select('detail_pertanyaan.id', 'detail_pertanyaan.pertanyaan')
+        ->get();
+        return response()->json([
+            "success" => true,
+            "data" => $db
+        ], 200);
+    }
+
+    public function editPertanyaan(Request $request, $id){
+        $pertanyaan = DetailPertanyaanModel::find($id);
+        if (is_null($pertanyaan)){
+            return response()->json([
+                "success" => false,
+                "message" => "data not found"
+            ], 404);
+        }
+        $pertanyaan->update($request->all());
+        return response()->json([
+            "success" => true,
+            "data" => $pertanyaan
+        ], 201);
+    }
+
     public function postPertanyaan(Request $request, $id){
         $paketId = DB::table('registrasi_paket')->where('id', $id)->value('id');
         try {

@@ -36,6 +36,7 @@ Route::delete('user/{id}', 'Users\UserController@deleteUser');
 |      PAKET      |
 -----------------*/
 Route::get('paket', 'Paket\JenisPaketController@tampilJenisPaket');
+Route::get('paket/{id}', 'Paket\JenisPaketController@tampilById');
 Route::post('paket', 'Paket\JenisPaketController@tambahPaket');
 Route::put('paket/{id}', 'Paket\JenisPaketController@editPaket');
 
@@ -47,17 +48,14 @@ Route::post('registrasiPaket/{id}', 'Paket\registrasiPaketController@addRegistPa
 Route::post('registrasiPaket', 'Paket\RegistrasiPaketController@submitRegist')->name('registrasi.store');
 
 
-/* ----------------------
-|    JUDUL DESKRIPSI   |
-------------------------*/
-Route::get('pertanyaan/judulDeskripsi/{id}', 'Pertanyaan\PertanyaanController@tampilJudulDeskripsi');
-Route::post('pertanyaan/judulDeskripsi/{id}', 'Pertanyaan\PertanyaanController@addJudulDeskripsi');
-Route::put('pertanyaan/judulDeskripsi/{id}', 'Pertanyaan\PertanyaanController@editJudulDeskripsi');
 /* ----------------
 |    PERTANYAAN   |
 -----------------*/
 
 Route::get('pertanyaan', 'Pertanyaan\PertanyaanController@tampilPertanyaan');
+Route::get('pertanyaan/{id}', 'Pertanyaan\PertanyaanController@tampilById');
+Route::get('pertanyaan/tampilPertanyaanByRegistrasiId/{id}', 'Pertanyaan\PertanyaanController@tampilPertanyaanByRegistrasiId');
+Route::put('pertanyaan/{id}', 'Pertanyaan\PertanyaanController@editPertanyaan');
 Route::post('pertanyaan/postPertanyaan/{id}', 'Pertanyaan\PertanyaanController@postPertanyaan');
 Route::delete('pertanyaan/deletePertanyaan/{id}', 'Pertanyaan\PertanyaanController@deletePertanyaan');
 
@@ -65,5 +63,17 @@ Route::delete('pertanyaan/deletePertanyaan/{id}', 'Pertanyaan\PertanyaanControll
 |    PERTANYAAN SCREENING   |
 ----------------------------*/
 Route::get('pertanyaanScreening', 'PertanyaanScreening\PertanyaanScreeningController@tampilPertanyaanScreening');
+Route::get('pertanyaanScreeningByRegistrasiId/{id}', 'PertanyaanScreening\PertanyaanScreeningController@tampilSemuaPertanyaanByRegistrasiId');
 Route::post('pertanyaanScreening/{id}', 'PertanyaanScreening\PertanyaanScreeningController@postPertanyaanScreening');
 Route::put('pertanyaanScreening/{id}', 'PertanyaanScreening\PertanyaanScreeningController@editPertanyaanScreening');
+Route::delete('pertanyaanScreening/{id}', 'PertanyaanScreening\PertanyaanScreeningController@hapusPertanyaanScreening');
+
+/* --------------------------------
+|    JAWAB PERTANYAAN SCREENING   |
+---------------------------------*/
+Route::get('jawabPertanyaanScreeningByIdPertanyaan/{id}', 'PertanyaanScreening\JawabPertanyaanScreeningController@tampilSemuaJawabanByIdPertanyaan');
+Route::get('getjawabByUserIdPertanyaanScreening/{id}', 'PertanyaanScreening\JawabPertanyaanScreeningController@tampilSemuaJawabanByIdUser');
+Route::get('getjawabPertanyaanScreening/{id}', 'PertanyaanScreening\JawabPertanyaanScreeningController@getJawabanById');
+Route::post('jawabPertanyaanScreening/{id}', 'PertanyaanScreening\JawabPertanyaanScreeningController@postJawaban');
+
+

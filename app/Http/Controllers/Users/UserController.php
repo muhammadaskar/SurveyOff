@@ -53,7 +53,7 @@ class Usercontroller extends Controller
         }catch(Exception $e){
             return response()->json([
                 "success" => false,
-                "message" => $e
+                "message" => "Terjadi kesalahan pada $e"
             ], 400);
         }
     }
@@ -68,6 +68,7 @@ class Usercontroller extends Controller
         } 
         else{ 
             return response()->json([
+                'success' => false,
                 'error'=>'Unauthorised'
             ], 401); 
         } 
