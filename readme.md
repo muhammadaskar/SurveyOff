@@ -20,7 +20,7 @@
 
 ## Registrasi Paket Pertanyaan
 - id : integer
-- user_id : integer references on id(user)
+- user_id : integer references on id(users)
 - paket_id : integer references on id(jenis_paket)
 - name : string(199)
 - email : string(199)
@@ -51,11 +51,13 @@
 
 ## Jawab Pertanyaan Screening
 - id : int (10)
+- user_id : integer references on id(users)
 - pertanyaan_id : integer references on id(detail_pertanyaan_screening)
 - jawaban : string(199)
 
 ## Jawab Pertanyaan
 - id : int (10)
+- user_id : integer references on id(users)
 - pertanyaan_id : integer references on id(detail_pertanyaan)
 - jawaban : string(199)
 
