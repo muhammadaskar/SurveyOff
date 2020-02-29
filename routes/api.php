@@ -21,6 +21,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     Route::post('user/upload', 'Users\UserController@uploadFoto');
 // });
 
+/* TAMBAHKAN SLASH API PADA LINK 
+    CONTOH : - LINK UNTUK GET USER BY ID
+             http://localhost:8000/api/user/9
+*/
+
 /* ----------------
 |      USER      |
 -----------------*/
@@ -84,10 +89,20 @@ Route::post('jawabPertanyaanByIdPertanyaan/post/{id}', 'Pertanyaan\JawabPertanya
 Route::put('jawabPertanyaanById/update/{id}', 'Pertanyaan\JawabPertanyaanController@editJawabanById');
 Route::delete('jawabPertanyaanById/delete/{id}', 'Pertanyaan\JawabPertanyaanController@hapusJawabanById');
 
-
 /* -------------------------
 |       ---HASIL---       |
 --------------------------*/
 Route::get('hasilPertanyaan/{id}', 'Hasil\HasilController@tampilJawabanDanPertanyaanByIdPertanyaan');
 Route::get('hasilPertanyaanByIdUser/{id}', 'Hasil\HasilController@tampilJawabanDanPertanyaanByIdUser');
+
+/* --------------------------------
+|       ---RESPONDEN---         |
+---------------------------------*/
+Route::get('responden', 'Responden\RespondenController@tampilSemuaResponden');
+Route::get('responden/{id}', 'Responden\RespondenController@getRespondenById');
+Route::post('responden/post/{id}', 'Responden\RespondenController@postResponden');
+Route::put('responden/update/{id}', 'Responden\RespondenController@editRespondenBydId');
+Route::delete('responden/delete/{id}', 'Responden\RespondenController@deleteResponden');
+
+
 
