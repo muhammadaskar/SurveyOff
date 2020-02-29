@@ -17,6 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Route::group(['middleware' => 'auth:api'], function() {
+//     Route::post('user/upload', 'Users\UserController@uploadFoto');
+// });
+
 /* ----------------
 |      USER      |
 -----------------*/
@@ -26,11 +30,6 @@ Route::post('user/register', 'Users\UserController@register');
 Route::post('user/login', 'Users\UserController@login');
 Route::put('user/{id}', 'Users\UserController@editUser');
 Route::delete('user/{id}', 'Users\UserController@deleteUser');
-
-// Route::group(['middleware' => 'auth:api'], function() {
-//     Route::post('user/upload', 'Users\UserController@uploadFoto');
-// });
-
 
 /* ----------------
 |      PAKET      |
@@ -47,16 +46,14 @@ Route::get('registrasiPaket', 'Paket\registrasiPaketController@tampil');
 Route::post('registrasiPaket/{id}', 'Paket\registrasiPaketController@addRegistPaket');
 Route::post('registrasiPaket', 'Paket\RegistrasiPaketController@submitRegist')->name('registrasi.store');
 
-
 /* ----------------
 |    PERTANYAAN   |
 -----------------*/
-
 Route::get('pertanyaan', 'Pertanyaan\PertanyaanController@tampilPertanyaan');
 Route::get('pertanyaan/{id}', 'Pertanyaan\PertanyaanController@tampilById');
 Route::get('pertanyaan/tampilPertanyaanByRegistrasiId/{id}', 'Pertanyaan\PertanyaanController@tampilPertanyaanByRegistrasiId');
-Route::put('pertanyaan/{id}', 'Pertanyaan\PertanyaanController@editPertanyaan');
 Route::post('pertanyaan/postPertanyaan/{id}', 'Pertanyaan\PertanyaanController@postPertanyaan');
+Route::put('pertanyaan/{id}', 'Pertanyaan\PertanyaanController@editPertanyaan');
 Route::delete('pertanyaan/deletePertanyaan/{id}', 'Pertanyaan\PertanyaanController@deletePertanyaan');
 
 /* ---------------------------
@@ -75,12 +72,22 @@ Route::get('jawabPertanyaanScreeningByIdPertanyaan/{id}', 'PertanyaanScreening\J
 Route::get('getjawabByUserIdPertanyaanScreening/{id}', 'PertanyaanScreening\JawabPertanyaanScreeningController@tampilSemuaJawabanByIdUser');
 Route::get('getjawabPertanyaanScreening/{id}', 'PertanyaanScreening\JawabPertanyaanScreeningController@getJawabanById');
 Route::post('jawabPertanyaanScreening/{id}', 'PertanyaanScreening\JawabPertanyaanScreeningController@postJawaban');
+Route::put('jawabPertanyaanScreening/update/{id}', 'PertanyaanScreening\JawabPertanyaanScreeningController@editJawabanById');
+Route::delete('jawabPertanyaanScreening/{id}', 'PertanyaanScreening\JawabPertanyaanScreeningController@hapusJawabanById');
 
 /* -------------------------
 |    JAWAB PERTANYAAN    |
 --------------------------*/
 Route::get('jawabPertanyaanByIdPertanyaan/{id}', 'Pertanyaan\JawabPertanyaanController@tampilSemuaJawabanByIdPertanyaan');
-Route::post('jawabPertanyaanByIdPertanyaan/post/{id}', 'Pertanyaan\JawabPertanyaanController@postJawaban');
 Route::get('jawabPertanyaanById/{id}', 'Pertanyaan\JawabPertanyaanController@getJawabanById');
+Route::post('jawabPertanyaanByIdPertanyaan/post/{id}', 'Pertanyaan\JawabPertanyaanController@postJawaban');
+Route::put('jawabPertanyaanById/update/{id}', 'Pertanyaan\JawabPertanyaanController@editJawabanById');
+Route::delete('jawabPertanyaanById/delete/{id}', 'Pertanyaan\JawabPertanyaanController@hapusJawabanById');
 
+
+/* -------------------------
+|       ---HASIL---       |
+--------------------------*/
+Route::get('hasilPertanyaan/{id}', 'Hasil\HasilController@tampilJawabanDanPertanyaanByIdPertanyaan');
+Route::get('hasilPertanyaanByIdUser/{id}', 'Hasil\HasilController@tampilJawabanDanPertanyaanByIdUser');
 

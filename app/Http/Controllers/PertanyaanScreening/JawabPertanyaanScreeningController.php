@@ -82,4 +82,35 @@ class JawabPertanyaanScreeningController extends Controller
             "data" => $jawaban
         ], 200);
     }
+
+    public function editJawabanById(Request $request, $id){
+        $jawaban = JawabPertanyaanScreeningModel::find($id);
+        if (is_null($jawaban)){
+            return response()->json([
+                "success" => false,
+                "message" => "data not found"
+            ], 404);
+        }
+        $jawaban->update($request->all());
+        return response()->json([
+            "success" => true,
+            "data" => $jawaban
+        ], 200);
+    }
+    
+    public function hapusJawabanById($id){
+        $jawaban = JawabPertanyaanScreeningModel::find($id);
+        if (is_null($jawaban)){
+            return response()->json([
+                "success" => false,
+                "message" => "data not found"
+            ], 404);
+        }
+        $jawaban->delete();
+        return response()->json([
+            "success" => true,
+            "message" => "deleted successully"
+        ], 200);
+    }
+
 }
