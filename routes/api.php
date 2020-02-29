@@ -76,4 +76,11 @@ Route::get('getjawabByUserIdPertanyaanScreening/{id}', 'PertanyaanScreening\Jawa
 Route::get('getjawabPertanyaanScreening/{id}', 'PertanyaanScreening\JawabPertanyaanScreeningController@getJawabanById');
 Route::post('jawabPertanyaanScreening/{id}', 'PertanyaanScreening\JawabPertanyaanScreeningController@postJawaban');
 
+/* -------------------------
+|    JAWAB PERTANYAAN    |
+--------------------------*/
+Route::get('jawabPertanyaanByIdPertanyaan/{id}', 'Pertanyaan\JawabPertanyaanController@tampilSemuaJawabanByIdPertanyaan');
+Route::post('jawabPertanyaanByIdPertanyaan/post/{id}', 'Pertanyaan\JawabPertanyaanController@postJawaban');
+Route::get('jawabPertanyaanById/{id}', 'Pertanyaan\JawabPertanyaanController@getJawabanById');
+
 
