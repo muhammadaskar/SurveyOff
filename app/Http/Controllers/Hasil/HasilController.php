@@ -48,6 +48,21 @@ class HasilController extends Controller
         ], 200);
     }
 
+    public function deleteJawabanById($id){
+        $jawaban = JawabPertanyaanModel::find($id);
+        if (is_null($jawaban)){
+            return response()->json([
+                "success" => false,
+                "message" => "data not found"
+            ], 404);
+        }
+        $jawaban->delete();
+        return response()->json([
+            "success" => true,
+            "message" => "deleted successfully"
+        ], 200);
+    }
+
 
 
 }

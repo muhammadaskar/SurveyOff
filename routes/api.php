@@ -94,6 +94,7 @@ Route::delete('jawabPertanyaanById/delete/{id}', 'Pertanyaan\JawabPertanyaanCont
 --------------------------*/
 Route::get('hasilPertanyaan/{id}', 'Hasil\HasilController@tampilJawabanDanPertanyaanByIdPertanyaan');
 Route::get('hasilPertanyaanByIdUser/{id}', 'Hasil\HasilController@tampilJawabanDanPertanyaanByIdUser');
+Route::delete('hasilPertanyaan/{id}', 'Hasil\HasilController@deleteJawabanById');
 
 /* --------------------------------
 |       ---RESPONDEN---         |
