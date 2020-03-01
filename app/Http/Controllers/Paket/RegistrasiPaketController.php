@@ -143,6 +143,22 @@ class RegistrasiPaketController extends Controller
         ], 200);
     }
 
+    public function deletePaketById($id){
+        $data = RegistrasiPaketModel::find($id);
+        if (is_null($data)){
+            return response()->json([
+                "success" => false,
+                "message" => "data not found"
+            ], 404);
+        }
+        $data->delete();
+        return response()->json([
+            "success" => true,
+            "message" => "deleted successfully"
+        ], 200);
+        
+    }
+
     // public function addRegistPaket(Request $request, $id){
     //     $usersId = DB::table('users')->where('id', $id)->value('id');
     //     try{

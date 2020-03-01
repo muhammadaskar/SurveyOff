@@ -50,6 +50,7 @@ Route::put('paket/{id}', 'Paket\JenisPaketController@editPaket');
 Route::get('registrasiPaket', 'Paket\registrasiPaketController@tampil');
 Route::post('registrasiPaket/{id}', 'Paket\registrasiPaketController@addRegistPaket');
 Route::post('registrasiPaket', 'Paket\RegistrasiPaketController@submitRegist')->name('registrasi.store');
+Route::delete('registrasiPaket/{id}', 'Paket\registrasiPaketController@deletePaketById');
 
 /* ----------------
 |    PERTANYAAN   |
